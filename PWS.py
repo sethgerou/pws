@@ -9,6 +9,7 @@ import requests
 
 os.system('modprobe w1-gpio')
 os.system('modprobe w1-therm')
+
 wu_pwd = os.environ['wu_pwd']
 wu_id = os.environ['wu_id']
 
