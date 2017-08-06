@@ -9,6 +9,8 @@ import requests
 
 os.system('modprobe w1-gpio')
 os.system('modprobe w1-therm')
+wu_pwd = os.environ['wu_pwd']
+wu_id = os.environ['wu_id']
 
 base_dir = '/sys/bus/w1/devices/'
 device_folder = glob.glob(base_dir + '28*')[0]
@@ -35,9 +37,11 @@ def read_temp():
         return temp_f
 
 temp_f = read_temp()
-status = requests.get('http://rtupdate.wunderground.com/weatherstation/updateweatherstation.php?ID=KWADUVAL27&PASSWORD=f7de6a0b&dateutc=now&tempf=%s&realtime=1&rtfreq=10&action=updateraw' % temp_f)
+status = requests.get('http://rtupdate.wunderground.com/weatherstation/updateweatherstation.php?ID=%s&PASSWORD=%s&dateutc=now&tempf=%s&realtime=1&rtfreq=10&action=updateraw' % (wu_id, wu_pwd, temp_f))
 print(temp_f)
 print(status.text)
+print(wu_id)
+print(wu_pwd)
 	
 
 
